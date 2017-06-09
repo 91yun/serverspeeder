@@ -27,6 +27,9 @@ Get_Dist_Name()
     elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
         DISTRO='Ubuntu'
         PM='apt'
+    elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+        DISTRO='Raspbian'
+        PM='apt'
 	else
         DISTRO='unknow'
     fi
@@ -48,6 +51,9 @@ Get_Dist_Name
 if [ "$DISTRO" == "CentOS" ];then
 	yum install -y redhat-lsb curl net-tools
 elif [ "$DISTRO" == "Debian" ];then
+	apt-get update
+	apt-get install -y lsb-release curl
+elif [ "$DISTRO" == "Raspbian" ];then
 	apt-get update
 	apt-get install -y lsb-release curl
 elif [ "$DISTRO" == "Ubuntu" ];then
